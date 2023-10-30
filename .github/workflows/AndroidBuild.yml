@@ -19,11 +19,18 @@ jobs:
           java-version: "17"
           distribution: "zulu"
 
+      - name: Make gradle executable
+        run: chmod +x ./gradlew
+
+        # Execute gradle build command with stacktrace flag
+      - name: Build with gradle
+        run: ./gradlew build --stacktrace # Execute gradle script to build project
+
       - name: Build with Gradle
         run: ./gradlew build
 
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.3
+        uses: actions/upload-artifact@v1
         with:
-          name: AndroidCICD.apk
-          path: app/build/outputs/debug/app-debug.apk
+          name: Android-CI-CD
+          path: app/build/outputs/apk/debug/app-debug.apk
